@@ -486,7 +486,8 @@ uvc_error_t uvc_get_stream_ctrl_format_size(
         continue;
 
       DL_FOREACH(format->frame_descs, frame) {
-        if (frame->wWidth != width || frame->wHeight != height)
+	/* allow width and height auto-detection */
+        if ((width != 0 && frame->wWidth != width) || (height != 0 && frame->wHeight != height))
           continue;
 
         uint32_t *interval;
